@@ -1,6 +1,7 @@
 package com.ddd.ask.application.service.query;
 
 import com.ddd.ask.application.service.query.commands.*;
+import com.ddd.ask.application.service.query.finders.QueryByIdFinder;
 import com.ddd.ask.domain.query.Query;
 import com.ddd.ask.domain.query.QueryId;
 import com.ddd.ask.domain.query.QueryRepository;
@@ -59,5 +60,9 @@ public class QueryApplicationService {
             query.addResponse(command.response());
             queryRepository.save(query);
         });
+    }
+
+    public Optional<Query> findQueryById(QueryByIdFinder finder) {
+        return queryRepository.find(finder.queryId());
     }
 }

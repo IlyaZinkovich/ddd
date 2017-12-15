@@ -2,6 +2,7 @@ package com.ddd.ask.application.service;
 
 import com.ddd.ask.application.service.query.*;
 import com.ddd.ask.application.service.query.commands.*;
+import com.ddd.ask.application.service.query.finders.QueryByIdFinder;
 import com.ddd.ask.domain.editor.EditorId;
 import com.ddd.ask.domain.query.*;
 import com.ddd.ask.domain.question.Question;
@@ -10,6 +11,7 @@ import com.ddd.ask.infrastructure.InMemoryQueryRepository;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 import static java.util.Collections.singletonList;
@@ -118,5 +120,26 @@ public class QueryApplicationServiceTest {
         assertEquals(Optional.of(QueryStatus.WORKING_ON_ANSWER), query.map(Query::status));
         assertEquals(Optional.of(editorId), query.flatMap(Query::assigneeId));
         assertEquals(Optional.of(singletonList(response)), query.map(Query::responses));
+    }
+
+    @Test
+    public void testFindQueryById() {
+        QueryId queryId = new QueryId("a-121-0001");
+        Query testQuery = new Query(queryId, new SubscriberId("testSubscriberId"), new Question("testQuestion"));
+        SubscriberResponse subscriberResponse = new SubscriberResponse("response");
+        testQuery.addResponse(subscriberResponse);
+        PracticalLawResponse plResponse = new PracticalLawResponse("response");
+        testQuery.addResponse(plResponse);
+        QueryStatus status = QueryStatus.WORKING_ON_ANSWER;
+        testQuery.changeStatus(status);
+        EditorId editorId = new EditorId("editorUsername");
+        testQuery.assign(editorId);
+        queryRepository.save(testQuery);
+
+        Optional<Query> query = queryApplicationService.findQueryById(new QueryByIdFinder(queryId));
+
+        assertEquals(Optional.of(QueryStatus.WORKING_ON_ANSWER), query.map(Query::status));
+        assertEquals(Optional.of(editorId), query.flatMap(Query::assigneeId));
+        assertEquals(Optional.of(Arrays.asList(subscriberResponse, plResponse)), query.map(Query::responses));
     }
 }
