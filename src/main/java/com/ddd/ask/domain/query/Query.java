@@ -1,7 +1,10 @@
 package com.ddd.ask.domain.query;
 
+import com.ddd.ask.domain.editor.EditorId;
 import com.ddd.ask.domain.question.Question;
 import com.ddd.ask.domain.subscriber.SubscriberId;
+
+import java.util.Optional;
 
 public class Query {
 
@@ -9,11 +12,13 @@ public class Query {
     private final SubscriberId subscriberId;
     private Question question;
     private String title;
+    private Optional<EditorId> assigneeId;
 
     public Query(QueryId id, SubscriberId subscriberId, Question question) {
         this.id = id;
         this.question = question;
         this.subscriberId = subscriberId;
+        this.assigneeId = Optional.empty();
     }
 
     public QueryId id() {
@@ -34,5 +39,13 @@ public class Query {
 
     public void changeTitle(String title) {
         this.title = title;
+    }
+
+    public void assign(EditorId editorId) {
+        this.assigneeId = Optional.of(editorId);
+    }
+
+    public Optional<EditorId> assigneeId() {
+        return assigneeId;
     }
 }

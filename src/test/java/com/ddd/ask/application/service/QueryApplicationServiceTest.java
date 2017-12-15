@@ -1,5 +1,6 @@
 package com.ddd.ask.application.service;
 
+import com.ddd.ask.domain.editor.EditorId;
 import com.ddd.ask.domain.query.Query;
 import com.ddd.ask.domain.query.QueryId;
 import com.ddd.ask.domain.query.QueryRepository;
@@ -50,5 +51,18 @@ public class QueryApplicationServiceTest {
         Optional<Query> query = queryRepository.find(queryId);
         assertTrue(query.isPresent());
         assertEquals(Optional.of(newTitle), query.map(Query::title));
+    }
+
+    @Test
+    public void testQueryAssigned() {
+        EditorId editorId = new EditorId("editorUsername");
+        QueryId queryId = new QueryId("a-121-0001");
+        queryRepository.save(new Query(queryId, new SubscriberId("testSubscriberId"), new Question("testQuestion")));
+
+        queryApplicationService.assignQuery(new AssignQueryCommand(queryId, editorId));
+
+        Optional<Query> query = queryRepository.find(queryId);
+        assertTrue(query.isPresent());
+        assertEquals(Optional.of(editorId), query.flatMap(Query::assigneeId));
     }
 }

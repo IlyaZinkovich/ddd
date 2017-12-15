@@ -1,5 +1,6 @@
 package com.ddd.ask.application.service;
 
+import com.ddd.ask.domain.editor.EditorId;
 import com.ddd.ask.domain.query.Query;
 import com.ddd.ask.domain.query.QueryId;
 import com.ddd.ask.domain.query.QueryRepository;
@@ -20,10 +21,18 @@ public class QueryApplicationService {
         queryRepository.save(query);
     }
 
-    public void changeQueryTitle(ChangeQueryTitleCommand changeQueryTitleCommand) {
-        Optional<Query> foundQuery = queryRepository.find(changeQueryTitleCommand.queryId());
+    public void changeQueryTitle(ChangeQueryTitleCommand command) {
+        Optional<Query> foundQuery = queryRepository.find(command.queryId());
         foundQuery.ifPresent(query -> {
-            query.changeTitle(changeQueryTitleCommand.title());
+            query.changeTitle(command.title());
+            queryRepository.save(query);
+        });
+    }
+
+    public void assignQuery(AssignQueryCommand command) {
+        Optional<Query> foundQuery = queryRepository.find(command.queryId());
+        foundQuery.ifPresent(query -> {
+            query.assign(command.editorId());
             queryRepository.save(query);
         });
     }
