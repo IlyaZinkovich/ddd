@@ -16,7 +16,7 @@ public class Query {
     private String title;
     private Optional<EditorId> assigneeId;
     private QueryStatus status;
-    private List<SubscriberResponse> responses;
+    private List<Response> responses;
 
     public Query(QueryId id, SubscriberId subscriberId, Question question) {
         this.id = id;
@@ -69,7 +69,11 @@ public class Query {
         this.assigneeId = Optional.empty();
     }
 
-    public List<SubscriberResponse> responses() {
+    public void addResponse(PracticalLawResponse practicalLawResponse) {
+        this.responses.add(practicalLawResponse);
+    }
+
+    public List<Response> responses() {
         return responses;
     }
 }

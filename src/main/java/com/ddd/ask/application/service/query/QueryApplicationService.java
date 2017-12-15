@@ -52,4 +52,12 @@ public class QueryApplicationService {
             queryRepository.save(query);
         });
     }
+
+    public void addPracticalLawResponse(AddPracticalLawResponseCommand command) {
+        Optional<Query> foundQuery = queryRepository.find(command.queryId());
+        foundQuery.ifPresent(query -> {
+            query.addResponse(command.response());
+            queryRepository.save(query);
+        });
+    }
 }

@@ -99,4 +99,24 @@ public class QueryApplicationServiceTest {
         assertEquals(Optional.empty(), query.flatMap(Query::assigneeId));
         assertEquals(Optional.of(singletonList(response)), query.map(Query::responses));
     }
+
+    @Test
+    public void testPracticalLawResponseAddedToQuery() {
+        EditorId editorId = new EditorId("editorUsername");
+        QueryStatus status = QueryStatus.WORKING_ON_ANSWER;
+        QueryId queryId = new QueryId("a-121-0001");
+        Query testQuery = new Query(queryId, new SubscriberId("testSubscriberId"), new Question("testQuestion"));
+        testQuery.assign(editorId);
+        testQuery.changeStatus(status);
+        queryRepository.save(testQuery);
+        PracticalLawResponse response = new PracticalLawResponse("response");
+
+        queryApplicationService.addPracticalLawResponse(new AddPracticalLawResponseCommand(queryId, response));
+
+        Optional<Query> query = queryRepository.find(queryId);
+        assertTrue(query.isPresent());
+        assertEquals(Optional.of(QueryStatus.WORKING_ON_ANSWER), query.map(Query::status));
+        assertEquals(Optional.of(editorId), query.flatMap(Query::assigneeId));
+        assertEquals(Optional.of(singletonList(response)), query.map(Query::responses));
+    }
 }
