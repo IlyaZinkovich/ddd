@@ -1,7 +1,13 @@
 package com.ddd.ask.application.service.query;
 
-import com.ddd.ask.application.service.query.commands.*;
+import com.ddd.ask.application.service.query.commands.AssignQueryCommand;
+import com.ddd.ask.application.service.query.commands.ChangeQueryStatusCommand;
+import com.ddd.ask.application.service.query.commands.ChangeQueryTitleCommand;
+import com.ddd.ask.application.service.query.commands.CreateQueryCommand;
 import com.ddd.ask.application.service.query.finders.QueryByIdFinder;
+import com.ddd.ask.application.service.response.SubscriberResponseAddedEvent;
+import com.ddd.ask.domain.events.DomainEvent;
+import com.ddd.ask.domain.events.DomainEventPublisher;
 import com.ddd.ask.domain.query.Query;
 import com.ddd.ask.domain.query.QueryId;
 import com.ddd.ask.domain.query.QueryRepository;
@@ -12,8 +18,10 @@ public class QueryApplicationService {
 
     private final QueryRepository queryRepository;
 
-    public QueryApplicationService(QueryRepository queryRepository) {
+    public QueryApplicationService(QueryRepository queryRepository,
+                                   DomainEventPublisher domainEventPublisher) {
         this.queryRepository = queryRepository;
+        domainEventPublisher.subscribe(this::handleSubscriberResponseAddedEvent);
     }
 
     public void createQuery(CreateQueryCommand command) {
@@ -46,23 +54,18 @@ public class QueryApplicationService {
         });
     }
 
-    public void addSubscriberResponse(AddSubscriberResponseCommand command) {
-        Optional<Query> foundQuery = queryRepository.find(command.queryId());
-        foundQuery.ifPresent(query -> {
-            query.addResponse(command.response());
-            queryRepository.save(query);
-        });
-    }
-
-    public void addPracticalLawResponse(AddPracticalLawResponseCommand command) {
-        Optional<Query> foundQuery = queryRepository.find(command.queryId());
-        foundQuery.ifPresent(query -> {
-            query.addResponse(command.response());
-            queryRepository.save(query);
-        });
-    }
-
     public Optional<Query> findQueryById(QueryByIdFinder finder) {
         return queryRepository.find(finder.queryId());
+    }
+
+    public void handleSubscriberResponseAddedEvent(DomainEvent event) {
+        if (event instanceof SubscriberResponseAddedEvent) {
+            SubscriberResponseAddedEvent subscriberResponseAddedEvent = (SubscriberResponseAddedEvent) event;
+            final Optional<Query> foundQuery = queryRepository.find(subscriberResponseAddedEvent.queryId());
+            foundQuery.ifPresent(query -> {
+                query.resetStatusAndUnassign();
+                queryRepository.save(query);
+            });
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.ddd.ask.infrastructure;
+package com.ddd.ask.infrastructure.query;
 
 import com.ddd.ask.domain.query.Query;
 import com.ddd.ask.domain.query.QueryId;
@@ -43,6 +43,6 @@ public class InMemoryQueryRepository implements QueryRepository {
     private int validResourceIdSeed(int resourceIdSeed) {
         if (resourceIdSeed > 0 && (int) (Math.log10(resourceIdSeed) + 1) == 7)
             return resourceIdSeed;
-        else throw new InvalidResourceIdSeed();
+        else throw new InvalidResourceIdSeedException();
     }
 }
