@@ -36,4 +36,12 @@ public class QueryApplicationService {
             queryRepository.save(query);
         });
     }
+
+    public void changeQueryStatus(ChangeQueryStatusCommand command) {
+        Optional<Query> foundQuery = queryRepository.find(command.queryId());
+        foundQuery.ifPresent(query -> {
+            query.changeStatus(command.status());
+            queryRepository.save(query);
+        });
+    }
 }

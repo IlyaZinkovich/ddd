@@ -4,6 +4,7 @@ import com.ddd.ask.domain.editor.EditorId;
 import com.ddd.ask.domain.query.Query;
 import com.ddd.ask.domain.query.QueryId;
 import com.ddd.ask.domain.query.QueryRepository;
+import com.ddd.ask.domain.query.QueryStatus;
 import com.ddd.ask.domain.question.Question;
 import com.ddd.ask.domain.subscriber.SubscriberId;
 import com.ddd.ask.infrastructure.InMemoryQueryRepository;
@@ -64,5 +65,18 @@ public class QueryApplicationServiceTest {
         Optional<Query> query = queryRepository.find(queryId);
         assertTrue(query.isPresent());
         assertEquals(Optional.of(editorId), query.flatMap(Query::assigneeId));
+    }
+
+    @Test
+    public void testQueryStatusChanged() {
+        QueryStatus status = QueryStatus.WORKING_ON_ANSWER;
+        QueryId queryId = new QueryId("a-121-0001");
+        queryRepository.save(new Query(queryId, new SubscriberId("testSubscriberId"), new Question("testQuestion")));
+
+        queryApplicationService.changeQueryStatus(new ChangeQueryStatusCommand(queryId, status));
+
+        Optional<Query> query = queryRepository.find(queryId);
+        assertTrue(query.isPresent());
+        assertEquals(Optional.of(status), query.map(Query::status));
     }
 }

@@ -13,12 +13,14 @@ public class Query {
     private Question question;
     private String title;
     private Optional<EditorId> assigneeId;
+    private QueryStatus status;
 
     public Query(QueryId id, SubscriberId subscriberId, Question question) {
         this.id = id;
         this.question = question;
         this.subscriberId = subscriberId;
         this.assigneeId = Optional.empty();
+        this.status = QueryStatus.NOT_STARTED;
     }
 
     public QueryId id() {
@@ -47,5 +49,13 @@ public class Query {
 
     public Optional<EditorId> assigneeId() {
         return assigneeId;
+    }
+
+    public void changeStatus(QueryStatus status) {
+        this.status = status;
+    }
+
+    public QueryStatus status() {
+        return status;
     }
 }
