@@ -1,4 +1,4 @@
-package com.ddd.ask.application.service;
+package com.ddd.ask.application.service.query.commands;
 
 import com.ddd.ask.domain.question.Question;
 import com.ddd.ask.domain.subscriber.SubscriberId;

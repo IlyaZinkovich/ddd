@@ -1,6 +1,9 @@
-package com.ddd.ask.application.service;
+package com.ddd.ask.application.service.query;
 
-import com.ddd.ask.domain.editor.EditorId;
+import com.ddd.ask.application.service.query.commands.AssignQueryCommand;
+import com.ddd.ask.application.service.query.commands.ChangeQueryStatusCommand;
+import com.ddd.ask.application.service.query.commands.ChangeQueryTitleCommand;
+import com.ddd.ask.application.service.query.commands.CreateQueryCommand;
 import com.ddd.ask.domain.query.Query;
 import com.ddd.ask.domain.query.QueryId;
 import com.ddd.ask.domain.query.QueryRepository;

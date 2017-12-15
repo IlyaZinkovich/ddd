@@ -1,4 +1,4 @@
-package com.ddd.ask.application.service;
+package com.ddd.ask.application.service.query.commands;
 
 import com.ddd.ask.domain.editor.EditorId;
 import com.ddd.ask.domain.query.QueryId;
