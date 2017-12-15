@@ -7,7 +7,8 @@ public class Query {
 
     private final QueryId id;
     private final SubscriberId subscriberId;
-    private final Question question;
+    private Question question;
+    private String title;
 
     public Query(QueryId id, SubscriberId subscriberId, Question question) {
         this.id = id;
@@ -25,5 +26,13 @@ public class Query {
 
     public Question question() {
         return question;
+    }
+
+    public String title() {
+        return title;
+    }
+
+    public void changeTitle(String title) {
+        this.title = title;
     }
 }
