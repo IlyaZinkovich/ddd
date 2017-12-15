@@ -4,6 +4,8 @@ import com.ddd.ask.domain.editor.EditorId;
 import com.ddd.ask.domain.question.Question;
 import com.ddd.ask.domain.subscriber.SubscriberId;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class Query {
@@ -14,6 +16,7 @@ public class Query {
     private String title;
     private Optional<EditorId> assigneeId;
     private QueryStatus status;
+    private List<SubscriberResponse> responses;
 
     public Query(QueryId id, SubscriberId subscriberId, Question question) {
         this.id = id;
@@ -21,6 +24,7 @@ public class Query {
         this.subscriberId = subscriberId;
         this.assigneeId = Optional.empty();
         this.status = QueryStatus.NOT_STARTED;
+        this.responses = new ArrayList<>();
     }
 
     public QueryId id() {
@@ -57,5 +61,15 @@ public class Query {
 
     public QueryStatus status() {
         return status;
+    }
+
+    public void addResponse(SubscriberResponse subscriberResponse) {
+        this.responses.add(subscriberResponse);
+        this.status = QueryStatus.NOT_STARTED;
+        this.assigneeId = Optional.empty();
+    }
+
+    public List<SubscriberResponse> responses() {
+        return responses;
     }
 }

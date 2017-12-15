@@ -1,15 +1,9 @@
 package com.ddd.ask.application.service;
 
 import com.ddd.ask.application.service.query.*;
-import com.ddd.ask.application.service.query.commands.AssignQueryCommand;
-import com.ddd.ask.application.service.query.commands.ChangeQueryStatusCommand;
-import com.ddd.ask.application.service.query.commands.ChangeQueryTitleCommand;
-import com.ddd.ask.application.service.query.commands.CreateQueryCommand;
+import com.ddd.ask.application.service.query.commands.*;
 import com.ddd.ask.domain.editor.EditorId;
-import com.ddd.ask.domain.query.Query;
-import com.ddd.ask.domain.query.QueryId;
-import com.ddd.ask.domain.query.QueryRepository;
-import com.ddd.ask.domain.query.QueryStatus;
+import com.ddd.ask.domain.query.*;
 import com.ddd.ask.domain.question.Question;
 import com.ddd.ask.domain.subscriber.SubscriberId;
 import com.ddd.ask.infrastructure.InMemoryQueryRepository;
@@ -18,6 +12,7 @@ import org.junit.Test;
 
 import java.util.Optional;
 
+import static java.util.Collections.singletonList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -83,5 +78,25 @@ public class QueryApplicationServiceTest {
         Optional<Query> query = queryRepository.find(queryId);
         assertTrue(query.isPresent());
         assertEquals(Optional.of(status), query.map(Query::status));
+    }
+
+    @Test
+    public void testSubscriberResponseAddedToQuery() {
+        EditorId editorId = new EditorId("editorUsername");
+        QueryStatus status = QueryStatus.WORKING_ON_ANSWER;
+        QueryId queryId = new QueryId("a-121-0001");
+        Query testQuery = new Query(queryId, new SubscriberId("testSubscriberId"), new Question("testQuestion"));
+        testQuery.assign(editorId);
+        testQuery.changeStatus(status);
+        queryRepository.save(testQuery);
+        SubscriberResponse response = new SubscriberResponse("response");
+
+        queryApplicationService.addSubscriberResponse(new AddSubscriberResponseCommand(queryId, response));
+
+        Optional<Query> query = queryRepository.find(queryId);
+        assertTrue(query.isPresent());
+        assertEquals(Optional.of(QueryStatus.NOT_STARTED), query.map(Query::status));
+        assertEquals(Optional.empty(), query.flatMap(Query::assigneeId));
+        assertEquals(Optional.of(singletonList(response)), query.map(Query::responses));
     }
 }
