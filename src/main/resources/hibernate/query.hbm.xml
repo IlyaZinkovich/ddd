@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<hibernate-mapping default-access="field" default-cascade="all">
+    <class name="com.ddd.ask.domain.query.Query" table="QUERY" lazy="true">
+        <composite-id name="id">
+            <key-property name="resourceId" column="RESOURCE_ID" type="java.lang.String" />
+        </composite-id>
+        <component name="subscriberId" class="com.ddd.ask.domain.subscriber.SubscriberId">
+            <property name="id" column="SUBSCRIBER_ID" type="java.lang.String" />
+        </component>
+        <component name="question" class="com.ddd.ask.domain.question.Question">
+            <property name="text" column="QUESTION_TEXT" type="java.lang.String" />
+        </component>
+        <component name="assigneeId" class="com.ddd.ask.domain.editor.EditorId">
+            <property name="username" column="ASSIGNEE_ID" type="java.lang.String" />
+        </component>
+        <property name="status" column="STATUS">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.ddd.ask.domain.query.QueryStatus</param>
+                <param name="useNamed">true</param>
+            </type>
+        </property>
+        <property name="title" column="TITLE" type="java.lang.String" />
+    </class>
+</hibernate-mapping>

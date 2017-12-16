@@ -1,8 +1,11 @@
 package com.ddd.ask.domain.query;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class QueryId {
+public class QueryId implements Serializable {
+
+    private static final long serialVersionUID = -5995669828598841751L;
 
     private String resourceId;
 

@@ -12,8 +12,10 @@ import com.ddd.ask.domain.query.Query;
 import com.ddd.ask.domain.query.QueryId;
 import com.ddd.ask.domain.query.QueryRepository;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
+@Transactional
 public class QueryApplicationService {
 
     private final QueryRepository queryRepository;

@@ -6,6 +6,8 @@ public class EditorId {
 
     private String username;
 
+    private EditorId() {}
+
     public EditorId(String username) {
         this.username = username;
     }

@@ -8,18 +8,19 @@ import java.util.Optional;
 
 public class Query {
 
-    private final QueryId id;
-    private final SubscriberId subscriberId;
+    private QueryId id;
+    private SubscriberId subscriberId;
     private Question question;
     private String title;
-    private Optional<EditorId> assigneeId;
+    private EditorId assigneeId;
     private QueryStatus status;
+
+    private Query() {}
 
     public Query(QueryId id, SubscriberId subscriberId, Question question) {
         this.id = id;
         this.question = question;
         this.subscriberId = subscriberId;
-        this.assigneeId = Optional.empty();
         this.status = QueryStatus.NOT_STARTED;
     }
 
@@ -44,11 +45,11 @@ public class Query {
     }
 
     public void assign(EditorId editorId) {
-        this.assigneeId = Optional.of(editorId);
+        this.assigneeId = editorId;
     }
 
     public Optional<EditorId> assigneeId() {
-        return assigneeId;
+        return Optional.ofNullable(assigneeId);
     }
 
     public void changeStatus(QueryStatus status) {
@@ -61,6 +62,6 @@ public class Query {
 
     public void resetStatusAndUnassign() {
         this.status = QueryStatus.NOT_STARTED;
-        this.assigneeId = Optional.empty();
+        this.assigneeId = null;
     }
 }
