@@ -5,7 +5,7 @@ import com.ddd.ask.application.service.query.commands.ChangeQueryStatusCommand;
 import com.ddd.ask.application.service.query.commands.ChangeQueryTitleCommand;
 import com.ddd.ask.application.service.query.commands.CreateQueryCommand;
 import com.ddd.ask.application.service.query.finders.QueryByIdFinder;
-import com.ddd.ask.application.service.response.SubscriberResponseAddedEvent;
+import com.ddd.ask.domain.response.SubscriberResponseAddedEvent;
 import com.ddd.ask.domain.events.DomainEvent;
 import com.ddd.ask.domain.events.DomainEventPublisher;
 import com.ddd.ask.domain.query.Query;

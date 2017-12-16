@@ -3,10 +3,7 @@ package com.ddd.ask.application.service.response;
 import com.ddd.ask.application.service.response.commands.AddPracticalLawResponseCommand;
 import com.ddd.ask.application.service.response.commands.AddSubscriberResponseCommand;
 import com.ddd.ask.domain.events.DomainEventPublisher;
-import com.ddd.ask.domain.response.PracticalLawResponse;
-import com.ddd.ask.domain.response.ResponseId;
-import com.ddd.ask.domain.response.ResponseRepository;
-import com.ddd.ask.domain.response.SubscriberResponse;
+import com.ddd.ask.domain.response.*;
 
 public class ResponseApplicationService {
 

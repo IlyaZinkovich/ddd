@@ -1,4 +1,4 @@
-package com.ddd.ask.application.service.response;
+package com.ddd.ask.domain.response;
 
 import com.ddd.ask.domain.events.DomainEvent;
 import com.ddd.ask.domain.query.QueryId;

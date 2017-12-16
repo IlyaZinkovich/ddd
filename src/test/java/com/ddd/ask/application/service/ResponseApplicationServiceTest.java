@@ -1,7 +1,7 @@
 package com.ddd.ask.application.service;
 
 import com.ddd.ask.application.service.response.ResponseApplicationService;
-import com.ddd.ask.application.service.response.SubscriberResponseAddedEvent;
+import com.ddd.ask.domain.response.SubscriberResponseAddedEvent;
 import com.ddd.ask.application.service.response.commands.AddPracticalLawResponseCommand;
 import com.ddd.ask.application.service.response.commands.AddSubscriberResponseCommand;
 import com.ddd.ask.domain.events.DomainEventPublisher;
