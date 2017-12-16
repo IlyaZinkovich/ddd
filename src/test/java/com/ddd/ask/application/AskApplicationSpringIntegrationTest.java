@@ -1,6 +1,6 @@
 package com.ddd.ask.application;
 
-import com.ddd.ask.application.configuration.AskConfiguration;
+import com.ddd.ask.application.configuration.ApplicationConfiguration;
 import com.ddd.ask.application.service.query.QueryApplicationService;
 import com.ddd.ask.application.service.query.commands.AssignQueryCommand;
 import com.ddd.ask.application.service.query.commands.ChangeQueryStatusCommand;
@@ -35,7 +35,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = AskConfiguration.class)
+@ContextConfiguration(classes = ApplicationConfiguration.class)
 @Transactional
 public class AskApplicationSpringIntegrationTest {
 
