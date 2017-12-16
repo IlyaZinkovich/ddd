@@ -5,8 +5,8 @@ import com.ddd.ask.domain.query.QueryId;
 
 public class AssignQueryCommand {
 
-    private QueryId queryId;
-    private EditorId editorId;
+    private final QueryId queryId;
+    private final EditorId editorId;
 
     public AssignQueryCommand(QueryId queryId, EditorId editorId) {
         this.queryId = queryId;

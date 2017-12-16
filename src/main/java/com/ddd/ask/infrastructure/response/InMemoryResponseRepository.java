@@ -15,7 +15,7 @@ import static java.util.stream.Collectors.toList;
 public class InMemoryResponseRepository implements ResponseRepository {
 
     private long idGenerator = 1L;
-    private Set<Response> responses = new HashSet<>();
+    private final Set<Response> responses = new HashSet<>();
 
     @Override
     public ResponseId nextIdentity() {

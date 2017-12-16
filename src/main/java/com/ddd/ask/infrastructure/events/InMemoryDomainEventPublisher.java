@@ -8,9 +8,9 @@ import java.util.*;
 
 public class InMemoryDomainEventPublisher implements DomainEventPublisher {
 
-    private Set<DomainEventSubscriber> subscribers = new HashSet<>();
+    private final Set<DomainEventSubscriber> subscribers = new HashSet<>();
 
-    private List<DomainEvent> log = new ArrayList<>();
+    private final List<DomainEvent> log = new ArrayList<>();
 
     @Override
     public void subscribe(DomainEventSubscriber subscriber) {

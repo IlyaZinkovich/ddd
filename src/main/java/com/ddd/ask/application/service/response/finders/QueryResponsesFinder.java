@@ -4,7 +4,7 @@ import com.ddd.ask.domain.query.QueryId;
 
 public class QueryResponsesFinder {
 
-    private QueryId queryId;
+    private final QueryId queryId;
 
     public QueryResponsesFinder(QueryId queryId) {
         this.queryId = queryId;

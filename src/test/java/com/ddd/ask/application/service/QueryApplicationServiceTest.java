@@ -30,12 +30,11 @@ public class QueryApplicationServiceTest {
     private static final int RESOURCE_ID_SEED = 1210000;
     private QueryRepository queryRepository;
     private QueryApplicationService queryApplicationService;
-    private DomainEventPublisher domainEventPublisher;
 
     @Before
     public void setup() {
         queryRepository = new InMemoryQueryRepository(RESOURCE_ID_SEED);
-        domainEventPublisher = new InMemoryDomainEventPublisher();
+        DomainEventPublisher domainEventPublisher = new InMemoryDomainEventPublisher();
         queryApplicationService = new QueryApplicationService(queryRepository, domainEventPublisher);
     }
 

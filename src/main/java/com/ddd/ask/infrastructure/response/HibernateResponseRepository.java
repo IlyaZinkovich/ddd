@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public class HibernateResponseRepository implements ResponseRepository {
 
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
     public HibernateResponseRepository(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;

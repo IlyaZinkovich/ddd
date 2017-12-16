@@ -13,7 +13,7 @@ import static java.lang.String.format;
 public class InMemoryQueryRepository implements QueryRepository {
 
     private int resourceIdGenerator;
-    private Set<Query> queries = new HashSet<>();
+    private final Set<Query> queries = new HashSet<>();
 
     public InMemoryQueryRepository(int resourceIdSeed) {
         this.resourceIdGenerator = validResourceIdSeed(resourceIdSeed);

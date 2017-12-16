@@ -4,8 +4,8 @@ import com.ddd.ask.domain.query.QueryId;
 
 public class ChangeQueryTitleCommand {
 
-    private QueryId queryId;
-    private String title;
+    private final QueryId queryId;
+    private final String title;
 
     public ChangeQueryTitleCommand(QueryId queryId, String title) {
         this.queryId = queryId;

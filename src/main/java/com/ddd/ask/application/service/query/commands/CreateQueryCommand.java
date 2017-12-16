@@ -5,9 +5,9 @@ import com.ddd.ask.domain.subscriber.SubscriberId;
 
 public class CreateQueryCommand {
 
-    private SubscriberId subscriberId;
+    private final SubscriberId subscriberId;
 
-    private Question question;
+    private final Question question;
 
     public CreateQueryCommand(SubscriberId subscriberId, Question question) {
         this.subscriberId = subscriberId;
