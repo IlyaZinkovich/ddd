@@ -20,7 +20,7 @@ public class QueryId {
         if (o == null || getClass() != o.getClass()) return false;
 
         QueryId queryId = (QueryId) o;
-        return Objects.equals(resourceId, queryId.resourceId);
+        return Objects.equals(resourceId, queryId.resourceId());
     }
 
     @Override

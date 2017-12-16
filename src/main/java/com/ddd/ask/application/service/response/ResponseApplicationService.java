@@ -2,8 +2,11 @@ package com.ddd.ask.application.service.response;
 
 import com.ddd.ask.application.service.response.commands.AddPracticalLawResponseCommand;
 import com.ddd.ask.application.service.response.commands.AddSubscriberResponseCommand;
+import com.ddd.ask.application.service.response.finders.QueryResponsesFinder;
 import com.ddd.ask.domain.events.DomainEventPublisher;
 import com.ddd.ask.domain.response.*;
+
+import java.util.List;
 
 public class ResponseApplicationService {
 
@@ -29,5 +32,9 @@ public class ResponseApplicationService {
         final PracticalLawResponse practicalLawResponse =
                 new PracticalLawResponse(responseId, command.responseText(), command.queryId());
         responseRepository.save(practicalLawResponse);
+    }
+
+    public List<Response> findResponsesByQuery(QueryResponsesFinder finder) {
+        return responseRepository.find(finder.queryId());
     }
 }

@@ -3,6 +3,7 @@ package com.ddd.ask.domain.response;
 import com.ddd.ask.domain.query.QueryId;
 
 import java.time.Instant;
+import java.util.Objects;
 
 public abstract class Response {
 
@@ -32,5 +33,19 @@ public abstract class Response {
 
     public QueryId queryId() {
         return queryId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Response response = (Response) o;
+        return Objects.equals(id, response.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id.hashCode());
     }
 }

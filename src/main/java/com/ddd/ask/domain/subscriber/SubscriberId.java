@@ -20,7 +20,7 @@ public class SubscriberId {
         if (o == null || getClass() != o.getClass()) return false;
 
         SubscriberId that = (SubscriberId) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(id, that.id());
     }
 
     @Override

@@ -10,7 +10,7 @@ public class ResponseId {
         this.id = id;
     }
 
-    public Long getId() {
+    public Long id() {
         return id;
     }
 
@@ -20,7 +20,7 @@ public class ResponseId {
         if (o == null || getClass() != o.getClass()) return false;
 
         ResponseId that = (ResponseId) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(id, that.id());
     }
 
     @Override

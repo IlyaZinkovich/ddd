@@ -9,6 +9,7 @@ import com.ddd.ask.application.service.query.finders.QueryByIdFinder;
 import com.ddd.ask.application.service.response.ResponseApplicationService;
 import com.ddd.ask.application.service.response.commands.AddPracticalLawResponseCommand;
 import com.ddd.ask.application.service.response.commands.AddSubscriberResponseCommand;
+import com.ddd.ask.application.service.response.finders.QueryResponsesFinder;
 import com.ddd.ask.domain.editor.EditorId;
 import com.ddd.ask.domain.events.DomainEventPublisher;
 import com.ddd.ask.domain.query.Query;
@@ -16,16 +17,18 @@ import com.ddd.ask.domain.query.QueryId;
 import com.ddd.ask.domain.query.QueryRepository;
 import com.ddd.ask.domain.query.QueryStatus;
 import com.ddd.ask.domain.question.Question;
-import com.ddd.ask.domain.response.ResponseRepository;
+import com.ddd.ask.domain.response.*;
 import com.ddd.ask.domain.subscriber.SubscriberId;
 import com.ddd.ask.infrastructure.events.InMemoryDomainEventPublisher;
 import com.ddd.ask.infrastructure.query.InMemoryQueryRepository;
 import com.ddd.ask.infrastructure.response.InMemoryResponseRepository;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class AskIntegrationTest {
 
@@ -49,5 +52,8 @@ public class AskIntegrationTest {
         assertEquals(Optional.of(new SubscriberId("subscriberId")), query.map(Query::subscriberId));
         assertEquals(Optional.empty(), query.flatMap(Query::assigneeId));
         assertEquals(Optional.of(new Question("question")), query.map(Query::question));
+        final List<Response> responsesByQuery = responseApplicationService.findResponsesByQuery(new QueryResponsesFinder(new QueryId("a-121-0001")));
+        assertTrue(responsesByQuery.contains(new PracticalLawResponse(new ResponseId(1L), "plResponse", new QueryId("a-121-0001"))));
+        assertTrue(responsesByQuery.contains(new SubscriberResponse(new ResponseId(2L), "subscriberResponse", new QueryId("a-121-0001"))));
     }
 }
