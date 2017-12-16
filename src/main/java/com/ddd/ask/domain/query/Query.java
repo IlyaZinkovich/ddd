@@ -15,7 +15,8 @@ public class Query {
     private EditorId assigneeId;
     private QueryStatus status;
 
-    private Query() {}
+    private Query() {
+    }
 
     public Query(QueryId id, SubscriberId subscriberId, Question question) {
         this.id = id;

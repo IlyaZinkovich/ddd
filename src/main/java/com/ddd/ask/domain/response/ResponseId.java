@@ -1,10 +1,16 @@
 package com.ddd.ask.domain.response;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class ResponseId {
+public class ResponseId implements Serializable {
+
+    private static final long serialVersionUID = 3174871553558256308L;
 
     private Long id;
+
+    private ResponseId() {
+    }
 
     public ResponseId(Long id) {
         this.id = id;

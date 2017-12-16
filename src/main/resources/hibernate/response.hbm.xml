@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<hibernate-mapping default-access="field" default-cascade="all">
+    <class name="com.ddd.ask.domain.response.Response" table="RESPONSE" lazy="true">
+        <composite-id name="id">
+            <key-property name="id" column="RESPONSE_ID" type="long"/>
+        </composite-id>
+        <discriminator column="RESPONSE_TYPE" type="java.lang.String"/>
+        <component name="queryId" class="com.ddd.ask.domain.query.QueryId">
+            <property name="resourceId" column="QUERY_ID" type="java.lang.String"/>
+        </component>
+        <property name="text" column="TEXT" type="java.lang.String"/>
+        <property name="modificationDate" column="MODIFICATION_DATE" type="java.time.Instant"/>
+        <subclass name="com.ddd.ask.domain.response.SubscriberResponse" discriminator-value="SUBSCRIBER"/>
+        <subclass name="com.ddd.ask.domain.response.PracticalLawResponse" discriminator-value="PRACTICAL_LAW"/>
+    </class>
+</hibernate-mapping>

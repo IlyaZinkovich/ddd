@@ -7,6 +7,4 @@ public class PracticalLawResponse extends Response {
     public PracticalLawResponse(ResponseId responseId, String text, QueryId queryId) {
         super(responseId, text, queryId);
     }
-
-
 }

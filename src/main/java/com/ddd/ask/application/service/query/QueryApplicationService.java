@@ -5,12 +5,12 @@ import com.ddd.ask.application.service.query.commands.ChangeQueryStatusCommand;
 import com.ddd.ask.application.service.query.commands.ChangeQueryTitleCommand;
 import com.ddd.ask.application.service.query.commands.CreateQueryCommand;
 import com.ddd.ask.application.service.query.finders.QueryByIdFinder;
-import com.ddd.ask.domain.response.SubscriberResponseAddedEvent;
 import com.ddd.ask.domain.events.DomainEvent;
 import com.ddd.ask.domain.events.DomainEventPublisher;
 import com.ddd.ask.domain.query.Query;
 import com.ddd.ask.domain.query.QueryId;
 import com.ddd.ask.domain.query.QueryRepository;
+import com.ddd.ask.domain.response.SubscriberResponseAddedEvent;
 
 import javax.transaction.Transactional;
 import java.util.Optional;

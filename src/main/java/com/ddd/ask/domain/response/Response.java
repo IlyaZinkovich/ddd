@@ -12,6 +12,9 @@ public abstract class Response {
     private String text;
     private QueryId queryId;
 
+    private Response() {
+    }
+
     public Response(ResponseId id, String text, QueryId queryId) {
         this.id = id;
         this.queryId = queryId;

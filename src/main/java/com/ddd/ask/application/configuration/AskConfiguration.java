@@ -7,7 +7,7 @@ import com.ddd.ask.domain.query.QueryRepository;
 import com.ddd.ask.domain.response.ResponseRepository;
 import com.ddd.ask.infrastructure.events.InMemoryDomainEventPublisher;
 import com.ddd.ask.infrastructure.query.HibernateQueryRepository;
-import com.ddd.ask.infrastructure.response.InMemoryResponseRepository;
+import com.ddd.ask.infrastructure.response.HibernateResponseRepository;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,8 +53,8 @@ public class AskConfiguration {
     }
 
     @Bean
-    public ResponseRepository responseRepository() {
-        return new InMemoryResponseRepository();
+    public ResponseRepository responseRepository(SessionFactory sessionFactory) {
+        return new HibernateResponseRepository(sessionFactory);
     }
 
     @Bean

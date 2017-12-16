@@ -10,11 +10,12 @@ public class SubscriberId {
         this.id = id;
     }
 
+    private SubscriberId() {
+    }
+
     public String id() {
         return id;
     }
-
-    private SubscriberId() {}
 
     @Override
     public boolean equals(Object o) {

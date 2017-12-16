@@ -6,7 +6,8 @@ public class Question {
 
     private String text;
 
-    private Question() {}
+    private Question() {
+    }
 
     public Question(String text) {
         this.text = text;

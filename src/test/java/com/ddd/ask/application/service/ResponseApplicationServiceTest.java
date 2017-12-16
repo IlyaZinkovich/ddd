@@ -1,12 +1,12 @@
 package com.ddd.ask.application.service;
 
 import com.ddd.ask.application.service.response.ResponseApplicationService;
-import com.ddd.ask.application.service.response.finders.QueryResponsesFinder;
-import com.ddd.ask.domain.response.*;
 import com.ddd.ask.application.service.response.commands.AddPracticalLawResponseCommand;
 import com.ddd.ask.application.service.response.commands.AddSubscriberResponseCommand;
+import com.ddd.ask.application.service.response.finders.QueryResponsesFinder;
 import com.ddd.ask.domain.events.DomainEventPublisher;
 import com.ddd.ask.domain.query.QueryId;
+import com.ddd.ask.domain.response.*;
 import com.ddd.ask.infrastructure.events.InMemoryDomainEventPublisher;
 import com.ddd.ask.infrastructure.response.InMemoryResponseRepository;
 import org.junit.Before;

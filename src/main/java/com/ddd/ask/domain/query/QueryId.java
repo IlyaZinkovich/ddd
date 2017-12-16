@@ -9,6 +9,9 @@ public class QueryId implements Serializable {
 
     private String resourceId;
 
+    private QueryId() {
+    }
+
     public QueryId(String resourceId) {
         this.resourceId = resourceId;
     }
